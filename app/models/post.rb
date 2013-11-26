@@ -7,12 +7,18 @@ class Post < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :tags
 
+  after_save :reset_cache
+
   def self.search(id)
     Rails.cache.fetch(id, :expires_in => 10.seconds) {Post.find(id)}
   end
 
   def self.all_posts
     Rails.cache.fetch('posts', :expires_in => 10.seconds) {Post.all}
+  end
+
+  def reset_cache
+    Rails.cache.clear
   end
 
 
