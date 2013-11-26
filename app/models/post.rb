@@ -7,7 +7,6 @@ class Post < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :tags
 
-  after_save :reset_cache
 
   def self.search(id)
     Rails.cache.fetch(id, :expires_in => 10.seconds) {Post.find(id)}
@@ -20,8 +19,6 @@ class Post < ActiveRecord::Base
   def reset_cache
     Rails.cache.clear
   end
-
-
 
 
   accepts_nested_attributes_for :tags, :allow_destroy => true, :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
