@@ -22,6 +22,8 @@ end
 
 gem 'jquery-rails'
 
+gem 'memcached'
+
 ruby '1.9.3'
 
 # To use ActiveModel has_secure_password

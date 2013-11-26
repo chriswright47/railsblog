@@ -20,6 +20,9 @@ Blog::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+
+  config.cache_store = Memcached::Rails.new( :servers => ['127.0.0.1'])
+
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
 
