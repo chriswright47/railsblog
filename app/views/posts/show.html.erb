@@ -16,13 +16,14 @@
 </p>
 
 <p>
+  <% Rails.cache.fetch('tags') do %>
   <b>Tags:</b>
   <%= join_tags(@post) %>
 </p>
+<% end %>
 
+<% Rails.cache.fetch('comments', :expires_in => 10.seconds) {render @post.comments} %>
 <h2>Comments</h2>
-<%= render @post.comments %>
-
 <h2>Add a comment:</h2>
 <%= render 'comments/form' %>
 
