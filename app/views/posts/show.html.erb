@@ -23,7 +23,6 @@
 <% end %>
 
 <% Rails.cache.fetch('comments', :expires_in => 10.seconds) {render @post.comments} %>
-<h2>Comments</h2>
 <h2>Add a comment:</h2>
 <%= render 'comments/form' %>
 
